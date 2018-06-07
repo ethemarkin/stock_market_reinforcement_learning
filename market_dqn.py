@@ -118,7 +118,7 @@ if __name__ == "__main__":
 
 				#print "  ".join(["%s:%.2f" % (l, i) for l, i in zip(env.actions, q[0].tolist())])
 				if np.nan in q:
-					print "OCCUR NaN!!!"
+					print ("OCCUR NaN!!!")
 					exit()
 
 			# apply action, get rewards and new state
@@ -129,7 +129,7 @@ if __name__ == "__main__":
 				color = bcolors.FAIL if env.actions[action] == "LONG" else bcolors.OKBLUE
 				if isRandom:
 					color = bcolors.WARNING if env.actions[action] == "LONG" else bcolors.OKGREEN
-				print "%s:\t%s\t%.2f\t%.2f\t" % (info["dt"], color + env.actions[action] + bcolors.ENDC, cumReward, info["cum"]) + ("\t".join(["%s:%.2f" % (l, i) for l, i in zip(env.actions, q[0].tolist())]) if isRandom == False else "")
+				print ("%s:\t%s\t%.2f\t%.2f\t" % (info["dt"], color + env.actions[action] + bcolors.ENDC, cumReward, info["cum"]) + ("\t".join(["%s:%.2f" % (l, i) for l, i in zip(env.actions, q[0].tolist())]) if isRandom == False else ""))
 
 			# store experience
 			exp_replay.remember([input_tm1, action, reward, input_t], game_over)

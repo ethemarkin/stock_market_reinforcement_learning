@@ -1,4 +1,4 @@
-from deeplearning_assistant.model_builder import AbstractModelBuilder
+from model_builder import AbstractModelBuilder
 
 class MarketPolicyGradientModelBuilder(AbstractModelBuilder):
 
