@@ -48,11 +48,11 @@ class MarketEnv(gym.Env):
 
 								lastClose = close
 								lastVolume = volume
-						except Exception, e:
-							print e, line.strip().split(",")
+						except (Exception, e):
+							print (e, line.strip().split(","))
 				f.close()
-			except Exception, e:
-				print e
+			except (Exception, e):
+				print (e)
 
 			if len(data.keys()) > scope:
 				self.dataMap[code] = data
