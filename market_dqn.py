@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 	f.close()
 
-	env = MarketEnv(dir_path = "./data/", target_codes = codeMap.keys(), input_codes = [], start_date = "2013-08-26", end_date = "2015-08-25", sudden_death = -1.0)
+	env = MarketEnv(dir_path = "./data/", target_codes = codeMap.keys(), input_codes = [], start_date = "2008-06-06", end_date = "2018-06-06", sudden_death = -1.0)
 
 	# parameters
 	epsilon = .5  # exploration
