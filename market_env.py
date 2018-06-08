@@ -172,7 +172,7 @@ class MarketEnv(gym.Env):
 			try:
 				subject.append([self.target[self.targetDates[self.currentTargetIndex - 1 - i]][2]])
 				subjectVolume.append([self.target[self.targetDates[self.currentTargetIndex - 1 - i]][3]])
-			except Exception, e):
+			except Exception, e:
 				print (self.targetCode, self.currentTargetIndex, i, len(self.targetDates))
 				self.done = True
 		tmpState.append([[subject, subjectVolume]])
