@@ -17,8 +17,8 @@ class AbstractModelBuilder(object):
 		if weights_path and path.isfile(weights_path):
 			try:
 				model.load_weights(weights_path)
-			except Exception, e:
-				print (e)
+			except (Exception):
+				print ('exception in model builder')
 
 		return model
 

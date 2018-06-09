@@ -31,7 +31,7 @@ class ExperienceReplay(object):
 		inputs = []
 
 		dim = len(self.memory[0][0][0])
-		for i in xrange(dim):
+		for i in range(dim):
 			inputs.append([])
 
 		targets = np.zeros((min(len_memory, batch_size), num_actions))
@@ -39,7 +39,7 @@ class ExperienceReplay(object):
 			state_t, action_t, reward_t, state_tp1 = self.memory[idx][0]
 			game_over = self.memory[idx][1]
 
-			for j in xrange(dim):
+			for j in range(dim):
 				inputs[j].append(state_t[j][0])
 
 			#inputs.append(state_t)
@@ -54,7 +54,7 @@ class ExperienceReplay(object):
 				targets[i, action_t] = reward_t + self.discount * Q_sa
 		
 		#inputs = np.array(inputs)
-		inputs = [np.array(inputs[i]) for i in xrange(dim)]
+		inputs = [np.array(inputs[i]) for i in range(dim)]
 
 		return inputs, targets
 
@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 	f.close()
 
-	env = MarketEnv(dir_path = "./data/", target_codes = codeMap.keys(), input_codes = [], start_date = "2008-06-06", end_date = "2018-06-06", sudden_death = -1.0)
+	env = MarketEnv(dir_path = "./data/", target_codes = codeMap.keys(), input_codes = [], start_date = "2016-06-06", end_date = "2018-06-06", sudden_death = -1.0)
 
 	# parameters
 	epsilon = .5  # exploration
@@ -129,7 +129,7 @@ if __name__ == "__main__":
 				color = bcolors.FAIL if env.actions[action] == "LONG" else bcolors.OKBLUE
 				if isRandom:
 					color = bcolors.WARNING if env.actions[action] == "LONG" else bcolors.OKGREEN
-				# print ("%s:\t%s\t%.2f\t%.2f\t" % (info["dt"], color + env.actions[action] + bcolors.ENDC, cumReward, info["cum"]) + ("\t".join(["%s:%.2f" % (l, i) for l, i in zip(env.actions, q[0].tolist())]) if isRandom == False else ""))
+				print ("%s:\t%s\t%.2f\t%.2f\t" % (info["dt"], color + env.actions[action] + bcolors.ENDC, cumReward, info["cum"]) + ("\t".join(["%s:%.2f" % (l, i) for l, i in zip(env.actions, q[0].tolist())]) if isRandom == False else ""))
 
 			# store experience
 			exp_replay.remember([input_tm1, action, reward, input_t], game_over)

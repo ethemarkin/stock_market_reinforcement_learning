@@ -4,7 +4,7 @@ class MarketPolicyGradientModelBuilder(AbstractModelBuilder):
 
 	def buildModel(self):
 		from keras.models import Model
-		from keras.layers import merge, Convolution2D, MaxPooling2D, Input, Dense, Flatten, Dropout, Reshape, TimeDistributed, BatchNormalization, Merge, merge
+		from keras.layers import Concatenate, concatenate, Convolution2D, MaxPooling2D, Input, Dense, Flatten, Dropout, Reshape, TimeDistributed, BatchNormalization
 		from keras.layers.advanced_activations import LeakyReLU
 		from keras import backend as K
 
@@ -16,7 +16,7 @@ class MarketPolicyGradientModelBuilder(AbstractModelBuilder):
 		inputs = [B]
 		merges = [b]
 
-		for i in xrange(1):
+		for i in range(1):
 			S = Input(shape=[2, 60, 1])
 			inputs.append(S)
 
@@ -44,7 +44,7 @@ class MarketPolicyGradientModelBuilder(AbstractModelBuilder):
 			h = LeakyReLU(0.001)(h)
 			merges.append(h)
 
-		m = merge(merges, mode = 'concat', concat_axis = 1)
+		m = concatenate(merges, axis = 1)
 		m = Dense(1024)(m)
 		m = LeakyReLU(0.001)(m)
 		m = Dense(512)(m)
@@ -60,7 +60,7 @@ class MarketModelBuilder(AbstractModelBuilder):
 	
 	def buildModel(self):
 		from keras.models import Model
-		from keras.layers import merge, Convolution2D, MaxPooling2D, Input, Dense, Flatten, Dropout, Reshape, TimeDistributed, BatchNormalization, Merge, merge
+		from keras.layers import Concatenate, concatenate, Convolution2D, MaxPooling2D, Input, Dense, Flatten, Dropout, Reshape, TimeDistributed, BatchNormalization
 		from keras.layers.advanced_activations import LeakyReLU
 		from keras import backend as K
 
@@ -74,7 +74,7 @@ class MarketModelBuilder(AbstractModelBuilder):
 		inputs = [B]
 		merges = [b]
 
-		for i in xrange(1):
+		for i in range(1):
 			S = Input(shape=[2, 60, 1])
 			inputs.append(S)
 
@@ -104,7 +104,7 @@ class MarketModelBuilder(AbstractModelBuilder):
 			h = Dropout(dr_rate)(h)
 			merges.append(h)
 
-		m = merge(merges, mode = 'concat', concat_axis = 1)
+		m = concatenate(merges, axis = 1)
 		m = Dense(1024)(m)
 		m = LeakyReLU(0.001)(m)
 		m = Dropout(dr_rate)(m)
